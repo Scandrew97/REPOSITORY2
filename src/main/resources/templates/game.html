@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<h1 th:text="${nomeGame}"></h1>	
+	<a href="/"><button>HomePage</button></a>
+	
+	<hr>
+	<button>Nuovo Team</button>
+	<h2>Lista Team</h2>
+	<ul>
+		<li><a th:href="|/team/?idGames=${nomeGame}&idTeam=Fanatic=${idTeam}|"></a></li>
+	</ul>
+	
+	<hr>
+	<button>Nuovo Match</button>
+	<h2>Lista Match</h2>
+	<ul>
+		<li>2023-11-30	Ninjas in Pijamas	4	6	TSM</li>
+	</ul>	
+	
+	<hr>
+	<div>
+		<form action="/game/newTeam" method="post">
+			<p>Modale Nuovo Team</p>
+			<button type="submit">Nuovo Team</button>
+		</form>
+	</div>
+	
+	<hr>
+	<div>
+		<form action="/game/newMatch" method="post">
+			<p>Modale Nuovo Match</p>
+			<button type="submit">Nuovo Match</button>
+		</form>
+	</div>
+	
+
+</body>
+</html>

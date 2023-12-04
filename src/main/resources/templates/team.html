@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<h1 th:text="${nomeTeam}"></h1>	
+	<a th:href="|/game/?idGames=${nomeGame}|"><button>HomePage</button></a>
+	
+	<button>Modifica Team</button>
+	<div>
+		<form action="/team/deleteTeam" method="post">
+			<button type="submit">Elimina Team</button>
+		</form>
+	</div>
+	
+	<hr>
+	<h2>Lista Player</h2>
+	<button>Nuovo Player</button>
+	<table>
+		<tr>
+			<th>Nickname</th>
+			<th>Nome</th>
+			<th>Cognome</th>
+			<th>DataNascita</th>
+			<th>Ruolo</th>
+		</tr>
+		<tr>
+			<td>Sneaky Fox</td>
+			<td>Lillian</td>
+			<td>Crankshaw</td>
+			<td>2002-03-03</td>
+			<td>ADC</td>
+		</tr>
+	</table>
+	
+	<hr>
+	<div>
+		<form action="/team/updateTeam" method="post">
+			<p>Modale Modifica Team</p>
+			<button type="submit">Modifica</button>
+		</form>
+	</div>
+	
+	<hr>
+	<div>
+		<form action="/team/newPlayer" method="post">
+			<p>Modale Nuovo Player</p>
+			<button type="submit">Inserisci</button>
+		</form>
+	</div>
+	
+	<hr>
+	<div>
+		<form action="/team/updatePlayer" method="post">
+			<p>Modifica Player</p>
+			<button type="submit">Modifica</button>
+		</form>
+	</div>
+
+</body>
+</html>
