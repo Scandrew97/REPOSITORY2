@@ -1,4 +1,4 @@
-package corso.WelcomeToEsports.main;
+package corso.WelcomeToEsports;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
