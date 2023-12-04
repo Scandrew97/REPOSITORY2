@@ -1,4 +1,4 @@
-package corso.WelcomToEsports.controller;
+package corso.WelcomeToEsports.controller;
 
 import java.util.HashMap;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import corso.WelcomToEsports.Context;
+import corso.WelcomeToEsports.context.Context;
 import corso.WelcomeToEsports.modelli.Matches;
 import corso.WelcomeToEsports.modelli.Teams;
 

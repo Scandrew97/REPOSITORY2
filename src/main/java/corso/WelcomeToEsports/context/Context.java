@@ -1,4 +1,4 @@
-package corso.WelcomToEsports;
+package corso.WelcomeToEsports.context;
 
 import java.sql.Date;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +25,7 @@ import corso.WelcomeToEsports.modelli.Teams;
 public class Context {
 
 	@Bean
+	@Primary
 	public DB database(@Value ("${db.adress}") String dbadress, @Value ("${db.user}") String dbuser, @Value ("${db.pass}") String dbpass) {
 		return new DB(dbadress,dbuser,dbpass);
 	}
@@ -68,8 +70,13 @@ public class Context {
 
 	@Bean
 	@Scope("prototype")
-	public Teams team() {
-		return new Teams();
+	public Teams team(HashMap<String, Object> params) {
+		Teams t=new Teams();
+		t.setId(Integer.parseInt(params.get("id")+""));
+		t.setNome(params.get("nome")+"");
+		t.setNazione(params.get("nazione")+"");
+		t.setIdGames(Integer.parseInt(params.get("idGames")+""));
+		return t;
 	}
 
 	@Bean
@@ -79,8 +86,16 @@ public class Context {
 
 	@Bean
 	@Scope("prototype")
-	public Matches match() {
-		return new Matches();
+	public Matches match(HashMap<String, Object> params) {
+		Matches m= new Matches();
+		m.setId(Integer.parseInt(params.get("id")+""));
+		m.setDataMatch(Date.valueOf(params.get("dataMatch")+""));
+		m.setIdGames(Integer.parseInt(params.get("idGames")+""));
+		m.setIdTeamHome(Integer.parseInt(params.get("idTeamHome")+""));
+		m.setIdteamAway(Integer.parseInt(params.get("idTeamAway")+""));
+		m.setPointsHome(Integer.parseInt(params.get("PointsHome")+""));
+		m.setPointsAway(Integer.parseInt(params.get("PointsAway")+""));
+		return m;
 	}
 
 
