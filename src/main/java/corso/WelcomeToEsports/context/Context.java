@@ -88,13 +88,15 @@ public class Context {
 	@Scope("prototype")
 	public Matches match(HashMap<String, Object> params) {
 		Matches m= new Matches();
+		int pointsHome = Integer.parseInt(params.get("pointsHome")+"");
+		int pointsAway = Integer.parseInt(params.get("pointsAway")+"");
 		m.setId(Integer.parseInt(params.get("id")+""));
 		m.setDataMatch(Date.valueOf(params.get("dataMatch")+""));
 		m.setIdGames(Integer.parseInt(params.get("idGames")+""));
 		m.setIdTeamHome(Integer.parseInt(params.get("idTeamHome")+""));
 		m.setIdteamAway(Integer.parseInt(params.get("idTeamAway")+""));
-		m.setPointsHome(Integer.parseInt(params.get("PointsHome")+""));
-		m.setPointsAway(Integer.parseInt(params.get("PointsAway")+""));
+		m.setPointsHome(pointsHome);
+		m.setPointsAway(pointsAway);
 		return m;
 	}
 

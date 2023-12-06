@@ -2,26 +2,31 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Esports HOME</title>
+<title>Welcome to Esports HOME</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 	
 	<h1>Welcome to Esports</h1>
 	
 	<hr>
-	<button>Nuovo Game</button>
-	<ul>
-		<!-- <li><a th:href="/game/?id=${id}"></a></li> -->
-		<li><span th:text="#{lista[0].titolo}"></span></li>
+	<button onclick="document.getElementById('home-mod-back').style.display='block'">Nuovo Game</button>
+	<ul th:each = "map : ${lista}">
+		<form action="/viewGame" method="post" ><button th:value = "${map.value.id}" th:text = "${map.value.titolo}" name="id">
+		</button></form>
+		<!-- <form th:href="@{/viewGame/__${map.value.id}__}" method="get"><button  th:text = "${map.value.titolo}">
+		</button></form> -->
 	</ul>
 	
 	<hr>
-	<div>
-		<form action="/newGame" method="post">
-			<h3>Modale Nuovo Game</h3>
-			<input type="text">
-			<button type="submit">Inserisci Nuovo Game</button>
-		</form>
+	<div id="home-mod-back">
+		<div id="home-mod-front">
+			<form action="/newGame" method="post">
+				<h3>Nuovo Game</h3>
+				<input type="text" name="titolo">
+				<button type="submit">Inserisci Nuovo Game</button>
+			</form>
+		</div>
 	</div>
 
 </body>

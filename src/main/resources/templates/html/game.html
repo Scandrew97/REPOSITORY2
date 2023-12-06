@@ -2,42 +2,98 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Esports GAMES</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-	
-	<h1 th:text="${nomeGame}"></h1>	
+	<form action="/game/openGame" method="post" ><h1 th:text="${nomeGioco}"></h1></form>
 	<a href="/"><button>HomePage</button></a>
 	
 	<hr>
-	<button>Nuovo Team</button>
+
 	<h2>Lista Team</h2>
-	<ul>
-		<li><a th:href="|/team/?idGames=${nomeGame}&idTeam=Fanatic=${idTeam}|"></a></li>
-	</ul>
-	
+	<form action="/game/viewTeams" method="get">
+		<ul th:each ="teamMap : ${listaTeams}">
+			<li th:text = "${teamMap.value.nome}"></li>
+		</ul>
+	</form>
+
 	<hr>
-	<button>Nuovo Match</button>
+	<p>Modale Nuovo Team</p>
+	<button onclick="document.getElementById('team-mod-back').style.display='block'" type="submit">Nuovo Team</button>
+	<hr>
+	<div id="team-mod-back">
+		<div id="team-mod-front">
+			<form action="/game/addTeam" method="post"></form>
+			<h3>Nuovo Team</h3>
+			<input type="hidden" name="idGames">
+			<input type="text" name="nome">
+			<input type="text" name="nazione">
+			<button type="submit">Inserisci Nuovo Team</button>
+		</div>
+	</div>
+
+	<hr>
+
+	<form action="/game/viewMatch" method="get">
 	<h2>Lista Match</h2>
-	<ul>
-		<li>2023-11-30	Ninjas in Pijamas	4	6	TSM</li>
-	</ul>	
+	<table>
+		<thead>
+			<td>
+				<tr>DATA MATCH</tr>
+			</td>
+			<td>
+				<tr>TEAM HOME</tr>
+			</td>
+			<td>
+				<tr>POINTS HOME</tr>
+			</td>
+			<td>
+				<tr>POINTS AWAY</tr>
+			</td>
+			<td>
+				<tr>TEAM AWAY</tr>
+			</td>
+		</thead>
+		<tbody th:each="matchMap : ${listaMatch}">
+			<td>
+				<tr th:text = "${matchMap.value.dataMatch}"></tr>
+			</td>
+			
+				<tr th:text = "${matchMap.value.nomeTeamHome}"></tr>
+			
+			<td>
+				<tr th:text = "${matchMap.value.pointsHome}"></tr>
+			</td>
+			
+				<tr th:text = "${matchMap.value.pointsAway}"></tr>
+			
+			<td>
+				<tr th:text = "${matchMap.value.nomeTeamAway}"></tr>
+			</td>
+		</tbody>
+	</table>
+</form>
 	
 	<hr>
-	<div>
-		<form action="/game/newTeam" method="post">
-			<p>Modale Nuovo Team</p>
-			<button type="submit">Nuovo Team</button>
-		</form>
-	</div>
-	
+		<div id="match-mod-back">
+			<div id="match-mod-front">
+				<form action="/game/addMatch" method="post">
+					<h3>Nuovo Match</h3>
+					<input type="hidden" name="idGames">
+					<input type="date" name="dataMatch">
+					<input type="text" name="nomeTeamHome">
+					<input type="number" name="pointsHome">
+					<input type="number" name="pointsAway">
+					<input type="text" name="nomeTeamAway">
+					<button type="submit">Inserisci Nuovo Match</button>
+				</form>
+			</div>
+		</div>
+		
 	<hr>
-	<div>
-		<form action="/game/newMatch" method="post">
-			<p>Modale Nuovo Match</p>
-			<button type="submit">Nuovo Match</button>
-		</form>
-	</div>
+	<p>Modale Nuovo Match</p>
+	<button onclick="document.getElementById('match-mod-back').style.display='block'" type="submit">Nuovo Match</button>
 	
 
 </body>

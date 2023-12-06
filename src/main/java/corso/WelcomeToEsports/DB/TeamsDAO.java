@@ -43,8 +43,8 @@ public class TeamsDAO {
 		return read("select * from TEAMS where nazione = ?", nazione);
 	}
 	
-	public Teams readIdGames(int idGames) {
-		return read("select * from TEAMS where idGames=?", idGames+"").get(idGames);
+	public HashMap<Integer, Teams> readIdGames(int idGames) {
+		return read("select * from TEAMS where idGames=?", idGames+"");
 	}
 	
 	public boolean create(Teams t){

@@ -35,8 +35,16 @@ public class MatchesDAO {
 	public Matches read(int id) {
 		return read("select * from MATCHES where id=?", id+"").get(id);
 	}
-	public Matches readIdGames(int idGames) {
-		return read("select * from MATCHES where idGames=?", idGames+"").get(idGames);
+	public HashMap<Integer, Matches> readIdGames(int idGames) {
+		return read("select * from MATCHES where idGames=?", idGames+"");
+	}
+
+	public HashMap<Integer, Matches> readTeamHome(int idGames){
+		return read("select dataMatch, nome, pointsHome from teams t join matches m on t.id=m.idTeamHome where t.idGames=?", idGames+"");
+	}
+
+	public HashMap<Integer, Matches> readTeamAway(int idGames){
+		return read("select pointsAway, nome from teams t join matches m on t.id=m.idTeamAway where t.idGames=?", idGames+"");
 	}
 	
 	public boolean create(Matches m){

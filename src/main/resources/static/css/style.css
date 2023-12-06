@@ -1,0 +1,18 @@
+#home-mod-back, #team-mod-back, #match-mod-back{
+    display: none;
+    background-color: rgba(0, 0, 0, 0.452);
+    padding: 5px;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+#home-mod-front, #team-mod-front, #match-mod-front{
+    background-color: beige;
+    padding: 15px;
+    margin: 5% auto;
+    width: 60%;
+}

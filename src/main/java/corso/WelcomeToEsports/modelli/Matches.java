@@ -7,7 +7,9 @@ public class Matches extends Entity{
 	Date dataMatch;
 	int idGames;
 	int idTeamHome;
+	String nomeTeamHome;
 	int idteamAway;
+	String nomeTeamAway;
 	int pointsHome;
 	int pointsAway;
 	
@@ -52,6 +54,19 @@ public class Matches extends Entity{
 	}
 	public void setPointsAway(int pointsAway) {
 		this.pointsAway = pointsAway;
+	}
+
+	public String getNomeTeamHome(){
+		return nomeTeamHome;
+	}
+	public String getNomeTeamAway(){
+		return nomeTeamAway;
+	}
+	public void setNomeTeamHome(String nomeTeamHome){
+		this.nomeTeamHome=nomeTeamHome;
+	}
+	public void setNomeTeamAway(String nomeTeamAway){
+		this.nomeTeamAway=nomeTeamAway;
 	}
 	
 	
