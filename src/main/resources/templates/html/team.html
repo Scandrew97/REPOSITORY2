@@ -3,22 +3,34 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<script th:src="@{/javascript/funzioni.js}"></script>
 </head>
 <body>
 	
 	<h1 th:text="${nomeTeam}"></h1>	
-	<a th:href="|/game/?idGames=${nomeGame}|"><button>HomePage</button></a>
+	<a href="/"><button>HomePage</button></a>
+	<form action="/viewGame" method="post" ><button  name="id" th:value="${idGioco}" type="submit">Teams</button></form>
 	
-	<button>Modifica Team</button>
-	<div>
-		<form action="/team/deleteTeam" method="post">
-			<button type="submit">Elimina Team</button>
-		</form>
+	<button onclick="document.getElementById('team-mod-back2').style.display='block'" type="submit">Modifica Team</button>
+
+	<div id="team-mod-back2">
+		<div id="team-mod-front2">
+			<form action="/team/modTeam" method="post">
+				<h3>Nuovo Team</h3>
+				<input type="hidden" name="idGioco" th:value="${idGioco}">
+				<input type="hidden" name="idTeam" th:value="${idTeam}">
+				<input type="text" name="nome" id="nome">
+				<input type="text" name="nazione" id="nazione">
+				<button type="submit">Inserisci Nuovo Team</button>
+			</form>
+			<button onclick="chiudi_team()">X</button>
+			<button onclick="pulisci_team()">Pulisci</button>
+		</div>
 	</div>
 	
 	<hr>
 	<h2>Lista Player</h2>
-	<button>Nuovo Player</button>
 	<table>
 		<tr>
 			<th>Nickname</th>
@@ -27,28 +39,64 @@
 			<th>DataNascita</th>
 			<th>Ruolo</th>
 		</tr>
-		<tr>
-			<td>Sneaky Fox</td>
-			<td>Lillian</td>
-			<td>Crankshaw</td>
-			<td>2002-03-03</td>
-			<td>ADC</td>
+		<tr th:each="player : ${listaPlayer}">
+			<td th:text ="${player.value.nickname}"></td>
+			<td th:text ="${player.value.nome}"></td>
+			<td th:text ="${player.value.cognome}"></td>
+			<td th:text ="${player.value.dataNascita}"></td>
+			<td th:text ="${player.value.gamesRole}"></td>
+			<td>
+				<form action="/team/deletePlayers" th:method="post">
+					<input type="hidden" name="idTeam" th:value="${idTeam}">
+					<input type="hidden" name="id" th:value="${player.value.id}">
+					<button type="submit">Elimina</button>
+				</form>
+			</td>
+			<td><button onclick="document.getElementById('player-mod-back2').style.display='block'" type="submit">Modifica</button></td>
 		</tr>
 	</table>
 	
-	<hr>
-	<div>
-		<form action="/team/updateTeam" method="post">
-			<p>Modale Modifica Team</p>
-			<button type="submit">Modifica</button>
-		</form>
+	<button onclick="document.getElementById('player-mod-back').style.display='block'" type="submit">Nuovo Player</button>
+
+	<div id="player-mod-back">
+		<div id="player-mod-front">
+			<form action="/team/addPlayer" method="post">
+				<h3>Nuovo Player</h3>
+				<input type="hidden" name="idTeam" th:value="${idTeam}">
+				<input type="text" id="nickname" name="nickname" th:value="${nickname}">
+				<input type="text" id="nome" name="nome" th:value="${nome}">
+				<input type="text" id="cognome" name="cognome" th:value="${cognome}">
+				<input type="date" id="dataNascita" name="dataNascita" th:value="${dataNascita}">
+				<input type="text" id="gamesRole" name="gamesRole" th:value="${gamesRole}">
+				<button type="submit">Inserisci Nuovo Player</button>
+			</form>
+			<button onclick="chiudi_player()">X</button>
+			<button onclick="pulisci_player()">Pulisci</button>
+		</div>
+	</div>
+	<div id="player-mod-back2">
+		<div id="player-mod-front2">
+			<form action="/team/modPlayer" method="post">
+				<h3>Modifica Player</h3>
+				<input type="hidden" name="idTeam" th:value="${idTeam}">
+				<input type="hidden" name="idPlayer" th:value="${idPlayer}">
+				<input type="text" id="nickname" name="nickname">
+				<input type="text" id="nome" name="nome">
+				<input type="text" id="cognome" name="cognome">
+				<input type="date" id="dataNascita" name="dataNascita">
+				<input type="text" id="gamesRole" name="gamesRole">
+				<button type="submit">Inserisci Modifica Player</button>
+			</form>
+			<button onclick="chiudi_player2()">X</button>
+			<button onclick="pulisci_player()">Pulisci</button>
+		</div>
 	</div>
 	
 	<hr>
-	<div>
-		<form action="/team/newPlayer" method="post">
-			<p>Modale Nuovo Player</p>
-			<button type="submit">Inserisci</button>
+	<!-- <div>
+		<form action="/team/updateTeam" method="post">
+			<p>Modale Modifica Team</p>
+			<button type="submit">Modifica</button>
 		</form>
 	</div>
 	
@@ -58,7 +106,7 @@
 			<p>Modifica Player</p>
 			<button type="submit">Modifica</button>
 		</form>
-	</div>
+	</div> -->
 
 </body>
 </html>

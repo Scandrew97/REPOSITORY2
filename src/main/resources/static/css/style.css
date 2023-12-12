@@ -1,4 +1,4 @@
-#home-mod-back, #team-mod-back, #match-mod-back{
+#home-mod-back, #home-mod-back2, #team-mod-back, #team-mod-back2, #match-mod-back, #player-mod-back, #player-mod-back2{
     display: none;
     background-color: rgba(0, 0, 0, 0.452);
     padding: 5px;
@@ -10,7 +10,7 @@
     left: 0;
 }
 
-#home-mod-front, #team-mod-front, #match-mod-front{
+#home-mod-front, #home-mod-front2, #team-mod-front, #team-mod-front2, #match-mod-front, #player-mod-front, #player-mod-front2{
     background-color: beige;
     padding: 15px;
     margin: 5% auto;

@@ -4,97 +4,110 @@
 <meta charset="ISO-8859-1">
 <title>Esports GAMES</title>
 <link rel="stylesheet" th:href="@{/css/style.css}">
+<script th:src="@{/javascript/funzioni.js}"></script>
 </head>
 <body>
-	<form action="/game/openGame" method="post" ><h1 th:text="${nomeGioco}"></h1></form>
+	<h1 th:text="${nomeGioco}"></h1>
 	<a href="/"><button>HomePage</button></a>
+	<button onclick="document.getElementById('home-mod-back2').style.display='block'">Modifica Game</button>
+
+	<div id="home-mod-back2">
+		<div id="home-mod-front2">
+			<form action="/game/modGame" method="post">
+				<h3>Modifica Game</h3>
+				<input type="hidden" name="idGioco" th:value="${idGioco}">
+				<input type="text" name="titolo" id="titolo">
+				<button type="submit">Inserisci</button>
+			</form>
+			<button onclick="chiudi_home2()">X</button>
+			<button onclick="pulisci_home()">Pulisci</button>
+		</div>
+	</div>
 	
-	<hr>
-
 	<h2>Lista Team</h2>
-	<form action="/game/viewTeams" method="get">
-		<ul th:each ="teamMap : ${listaTeams}">
-			<li th:text = "${teamMap.value.nome}"></li>
+	<!-- <form action="/game/viewTeams" method="get"> -->
+		<ul th:each ="team : ${listaTeams}">
+			<li th:text = "${team.value.nome}" th:value = "${team.value}"></li>
+			<form action="/game/openTeam" th:method="post">
+				<!-- <input type="hidden" name="idGioco" th:value="${idGioco}"> -->
+				<input type="hidden" name="id" th:value="${team.value.id}">
+				<button type="submit">Gestisci</button>
+			</form>
+			<form action="/game/deleteTeam" th:method="post">
+				<input type="hidden" name="idGioco" th:value="${idGioco}">
+				<input type="hidden" name="id" th:value="${team.value.id}">
+				<button type="submit">Elimina</button>
+			</form>
 		</ul>
-	</form>
+	<!-- </form> -->
 
-	<hr>
-	<p>Modale Nuovo Team</p>
 	<button onclick="document.getElementById('team-mod-back').style.display='block'" type="submit">Nuovo Team</button>
-	<hr>
+
 	<div id="team-mod-back">
 		<div id="team-mod-front">
-			<form action="/game/addTeam" method="post"></form>
-			<h3>Nuovo Team</h3>
-			<input type="hidden" name="idGames">
-			<input type="text" name="nome">
-			<input type="text" name="nazione">
-			<button type="submit">Inserisci Nuovo Team</button>
+			<form action="/game/addTeam" method="post">
+				<h3>Nuovo Team</h3>
+				<input type="hidden" name="idGioco" th:value="${idGioco}">
+				<input type="text" name="nome" id="nome" th:value="${nome}">
+				<input type="text" name="nazione" id="nazione" th:value="${nazione}">
+				<button type="submit">Inserisci Nuovo Team</button>
+			</form>
+			<button onclick="chiudi_team()">X</button>
+			<button onclick="pulisci_team()">Pulisci</button>
 		</div>
 	</div>
 
-	<hr>
 
 	<form action="/game/viewMatch" method="get">
-	<h2>Lista Match</h2>
-	<table>
-		<thead>
-			<td>
-				<tr>DATA MATCH</tr>
-			</td>
-			<td>
-				<tr>TEAM HOME</tr>
-			</td>
-			<td>
-				<tr>POINTS HOME</tr>
-			</td>
-			<td>
-				<tr>POINTS AWAY</tr>
-			</td>
-			<td>
-				<tr>TEAM AWAY</tr>
-			</td>
-		</thead>
-		<tbody th:each="matchMap : ${listaMatch}">
-			<td>
-				<tr th:text = "${matchMap.value.dataMatch}"></tr>
-			</td>
-			
-				<tr th:text = "${matchMap.value.nomeTeamHome}"></tr>
-			
-			<td>
-				<tr th:text = "${matchMap.value.pointsHome}"></tr>
-			</td>
-			
-				<tr th:text = "${matchMap.value.pointsAway}"></tr>
-			
-			<td>
-				<tr th:text = "${matchMap.value.nomeTeamAway}"></tr>
-			</td>
-		</tbody>
-	</table>
-</form>
+		<h2>Lista Match</h2>
+		<table>
+			<tr>
+				<td>DATA MATCH</td>
+				<td>TEAM HOME</td>
+				<td colspan="3">VS</td>
+				<td>TEAM AWAY</td>
+			</tr>
+			<tr th:each="matchMap : ${listaMatch}">
+				<td th:text = "${matchMap.value.dataMatch}"></td>
+				<td th:text = "${matchMap.value.nomeTeamHome}"></td>
+				<td th:text = "${matchMap.value.pointsHome}"></td>
+				<td>-</td>
+				<td th:text = "${matchMap.value.pointsAway}"></td>
+				<td th:text = "${matchMap.value.nomeTeamAway}"></td>
+				<td>
+					<form action="/game/deleteMatch" th:method="post">
+						<input type="hidden" name="idGioco" th:value="${idGioco}">
+						<input type="hidden" name="id" th:value="${matchMap.value.id}">
+						<button type="submit">Elimina</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</form>
 	
-	<hr>
-		<div id="match-mod-back">
-			<div id="match-mod-front">
-				<form action="/game/addMatch" method="post">
-					<h3>Nuovo Match</h3>
-					<input type="hidden" name="idGames">
-					<input type="date" name="dataMatch">
-					<input type="text" name="nomeTeamHome">
-					<input type="number" name="pointsHome">
-					<input type="number" name="pointsAway">
-					<input type="text" name="nomeTeamAway">
-					<button type="submit">Inserisci Nuovo Match</button>
-				</form>
-			</div>
+	<div id="match-mod-back">
+		<div id="match-mod-front">
+			<form action="/game/addMatch" method="post">
+				<h3>Nuovo Match</h3>
+				<input type="hidden" name="idGioco" th:value="${idGioco}">
+				<input type="date" name="dataMatch" id="dataMatch" th:value="${dataMatch}">
+				<select  name="idTeamHome">
+					<option th:each ="teamMap : ${listaTeams}" th:text = "${teamMap.value.nome}" th:value = "${teamMap.value.id}"></option>
+				</select>
+				<!-- <input type="text" name="nomeTeamHome" th:value="${nomeTeamHome}"> -->
+				<input type="number" id="pointsHome" name="pointsHome" th:value="${pointsHome}">
+				<input type="number" id="pointsAway" name="pointsAway" th:value="${pointsAway}">
+				<select name="idTeamAway">
+					<option th:each ="teamMap : ${listaTeams}" th:text = "${teamMap.value.nome}" th:value = "${teamMap.value.id}"></option>
+				</select>
+				<button type="submit">Inserisci Nuovo Match</button>
+			</form>
+			<button onclick="chiudi_match()">X</button>
+			<button onclick="pulisci_match()">Pulisci</button>
 		</div>
-		
-	<hr>
-	<p>Modale Nuovo Match</p>
+	</div>
+
 	<button onclick="document.getElementById('match-mod-back').style.display='block'" type="submit">Nuovo Match</button>
 	
-
 </body>
 </html>

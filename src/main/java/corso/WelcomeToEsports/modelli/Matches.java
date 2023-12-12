@@ -37,10 +37,10 @@ public class Matches extends Entity{
 	public void setIdTeamHome(int idTeamHome) {
 		this.idTeamHome = idTeamHome;
 	}
-	public int getIdteamAway() {
+	public int getIdTeamAway() {
 		return idteamAway;
 	}
-	public void setIdteamAway(int idteamAway) {
+	public void setIdTeamAway(int idteamAway) {
 		this.idteamAway = idteamAway;
 	}
 	public int getPointsHome() {

@@ -94,7 +94,7 @@ public class Context {
 		m.setDataMatch(Date.valueOf(params.get("dataMatch")+""));
 		m.setIdGames(Integer.parseInt(params.get("idGames")+""));
 		m.setIdTeamHome(Integer.parseInt(params.get("idTeamHome")+""));
-		m.setIdteamAway(Integer.parseInt(params.get("idTeamAway")+""));
+		m.setIdTeamAway(Integer.parseInt(params.get("idTeamAway")+""));
 		m.setPointsHome(pointsHome);
 		m.setPointsAway(pointsAway);
 		return m;

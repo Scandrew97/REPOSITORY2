@@ -53,8 +53,8 @@ public class TeamsDAO {
 	}
 	
 	public boolean update(Teams t){
-		return db.eseguiUpdate("update TEAMS set nome =?, nazione =?, idGames =?",
-				t.getNome(),t.getNazione(),t.getIdGames()+"");
+		return db.eseguiUpdate("update TEAMS set nome =?, nazione =?, idGames =? where id=?",
+				t.getNome(),t.getNazione(),t.getIdGames()+"",t.getId()+"");
 	}
 	
 	public boolean delete(int id){

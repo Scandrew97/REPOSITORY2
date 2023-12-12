@@ -49,12 +49,12 @@ public class MatchesDAO {
 	
 	public boolean create(Matches m){
 		return db.eseguiUpdate("insert into MATCHES (dataMatch, idGames, idTeamHome, idTeamAway, pointsHome, pointsAway) values (?,?,?,?,?,?)",
-				m.getDataMatch()+"",m.getIdGames()+"",m.getIdTeamHome()+"",m.getIdteamAway()+"",m.getPointsHome()+"",m.getPointsAway()+"");
+				m.getDataMatch()+"",m.getIdGames()+"",m.getIdTeamHome()+"",m.getIdTeamAway()+"",m.getPointsHome()+"",m.getPointsAway()+"");
 	}
 	
 	public boolean update(Matches m){
-		return db.eseguiUpdate("update MATCHES set dataMatch =?, idGames =?, idTeamHome =?, idTeamAway =?, pointsHome =?, pointsAway =? ",
-				m.getDataMatch()+"",m.getIdGames()+"",m.getIdTeamHome()+"",m.getIdteamAway()+"",m.getPointsHome()+"",m.getPointsAway()+"");
+		return db.eseguiUpdate("update MATCHES set dataMatch =?, idGames =?, idTeamHome =?, idTeamAway =?, pointsHome =?, pointsAway =? where id=?",
+				m.getDataMatch()+"",m.getIdGames()+"",m.getIdTeamHome()+"",m.getIdTeamAway()+"",m.getPointsHome()+"",m.getPointsAway()+"",m.getId()+"");
 	}
 	
 	public boolean delete(int id){

@@ -44,6 +44,11 @@ public class HomeController {
 		c.games().create(g);
 		return "redirect:/";
 	}
+	@PostMapping("/deleteGame")
+	public String deleteGame(@RequestParam("id") Integer id) {
+		c.games().delete(id);
+		return "redirect:/";
+	}
 
 	@PostMapping("/viewGame")
 	public ModelAndView viewGame(@RequestParam("id") Integer id){

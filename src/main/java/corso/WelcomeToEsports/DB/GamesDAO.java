@@ -42,7 +42,7 @@ public class GamesDAO {
 	}
 	
 	public boolean update(Games g){
-		return db.eseguiUpdate("update GAMES set titolo =?", g.getTitolo()+"");
+		return db.eseguiUpdate("update GAMES set titolo =? where id=?", g.getTitolo()+"", g.getId()+"");
 	}
 	
 	public boolean delete(int id){

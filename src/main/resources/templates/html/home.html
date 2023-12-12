@@ -4,6 +4,7 @@
 <meta charset="ISO-8859-1">
 <title>Welcome to Esports HOME</title>
 <link rel="stylesheet" th:href="@{/css/style.css}">
+<script th:src="@{/javascript/funzioni.js}"></script>
 </head>
 <body>
 	
@@ -12,10 +13,9 @@
 	<hr>
 	<button onclick="document.getElementById('home-mod-back').style.display='block'">Nuovo Game</button>
 	<ul th:each = "map : ${lista}">
-		<form action="/viewGame" method="post" ><button th:value = "${map.value.id}" th:text = "${map.value.titolo}" name="id">
-		</button></form>
-		<!-- <form th:href="@{/viewGame/__${map.value.id}__}" method="get"><button  th:text = "${map.value.titolo}">
-		</button></form> -->
+		<li th:text = "${map.value.titolo}"></li>
+		<form action="/viewGame" method="post" ><button th:value = "${map.value.id}" name="id">Apri</button></form>
+		<form action="/deleteGame" method="post" ><button th:value = "${map.value.id}" name="id">Cancella</button></form>
 	</ul>
 	
 	<hr>
@@ -23,9 +23,11 @@
 		<div id="home-mod-front">
 			<form action="/newGame" method="post">
 				<h3>Nuovo Game</h3>
-				<input type="text" name="titolo">
+				<input type="text" name="titolo" id="titolo">
 				<button type="submit">Inserisci Nuovo Game</button>
 			</form>
+			<button onclick="chiudi_home()">X</button>
+			<button onclick="pulisci_home()">Pulisci</button>
 		</div>
 	</div>
 
