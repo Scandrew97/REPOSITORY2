@@ -62,7 +62,7 @@ public class PlayersDAO {
 	}
 	
 	public boolean update(Players p){
-		return db.eseguiUpdate("update PLAYERS set titolo =?, nome =?, cognome =?, dataNascita =?, gamesRole =?, idTeam =? where id=?",
+		return db.eseguiUpdate("update PLAYERS set nickname =?, nome =?, cognome =?, dataNascita =?, gamesRole =?, idTeam =? where id=?",
 				p.getNickname(),p.getNome(),p.getCognome(),p.getDataNascita()+"",p.getGamesRole(),p.getIdTeam()+"",p.getId()+"");
 	}
 	

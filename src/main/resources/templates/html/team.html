@@ -52,7 +52,7 @@
 					<button type="submit">Elimina</button>
 				</form>
 			</td>
-			<td><button onclick="document.getElementById('player-mod-back2').style.display='block'" type="submit">Modifica</button></td>
+			<td><button onclick="document.getElementById('player-mod-back2').style.display='block'; document.getElementById('idPlayer').value = this.value;" type="submit" th:value="${player.value.id}">Modifica</button></td>
 		</tr>
 	</table>
 	
@@ -74,12 +74,13 @@
 			<button onclick="pulisci_player()">Pulisci</button>
 		</div>
 	</div>
+	
 	<div id="player-mod-back2">
 		<div id="player-mod-front2">
 			<form action="/team/modPlayer" method="post">
 				<h3>Modifica Player</h3>
 				<input type="hidden" name="idTeam" th:value="${idTeam}">
-				<input type="hidden" name="idPlayer" th:value="${idPlayer}">
+				<input type="hidden" name="idPlayer" id="idPlayer">
 				<input type="text" id="nickname" name="nickname">
 				<input type="text" id="nome" name="nome">
 				<input type="text" id="cognome" name="cognome">
@@ -93,20 +94,5 @@
 	</div>
 	
 	<hr>
-	<!-- <div>
-		<form action="/team/updateTeam" method="post">
-			<p>Modale Modifica Team</p>
-			<button type="submit">Modifica</button>
-		</form>
-	</div>
-	
-	<hr>
-	<div>
-		<form action="/team/updatePlayer" method="post">
-			<p>Modifica Player</p>
-			<button type="submit">Modifica</button>
-		</form>
-	</div> -->
-
 </body>
 </html>
